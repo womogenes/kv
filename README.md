@@ -12,20 +12,24 @@ Defaults are in `config.json` but this works without a config file.
   "data_dir": "data"
 }
 ```
+Data is stored in files under `data_dir` relative to where the command is run.
 
-Common use case is to put this behind an nginx reverse proxy.
+Common use case is to put this behind an nginx reverse proxy. Start the server with
+
+```bash
+python kv.py
+```
 
 
-## Usage
+## Client-side usage
 
-To store <value> under <key>:
+To store `<value>` under `<key>`:
 ```bash
 curl -X POST http://<host>/<key> -H "Content-Type: application/plain" -d "<value>"
 ```
 If given key already exists, it will be overwritten.
 
-To retrieve <value> under <key>:
+To retrievet the value under `<key>`:
 ```bash
 curl -X GET http://<host>/<key>
 ```
-
