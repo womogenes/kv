@@ -22,6 +22,7 @@ class Server(BaseHTTPRequestHandler):
 
         if len(key) == 0:
             self.send_response(400)
+            self.end_headers()
             return
 
         length = int(self.headers["Content-Length"])
@@ -32,12 +33,14 @@ class Server(BaseHTTPRequestHandler):
             fout.write(data)
 
         self.send_response(200)
+        self.end_headers()
 
     def do_GET(self):
         key = self.path.strip("/").split("/")[-1]
 
         if len(key) == 0:
             self.send_response(400)
+            self.end_headers()
             return
 
         try:
@@ -49,6 +52,7 @@ class Server(BaseHTTPRequestHandler):
 
         except FileNotFoundError:
             self.send_response(404)
+            self.end_headers()
 
 
 if __name__ == "__main__":
